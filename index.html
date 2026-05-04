@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NUBE - REDNOVATEL</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .panel {
+            background-color: #1e1e1e;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            text-align: center;
+            border: 1px solid #333;
+        }
+        h1 { color: #4CAF50; margin-bottom: 1rem; }
+        p { color: #bbbbbb; margin-bottom: 2rem; }
+        .btn-acceso {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-decoration: none;
+        }
+        .btn-acceso:hover { background-color: #45a049; }
+    </style>
+</head>
+<body>
+
+    <div class="panel">
+        <h1>NUBE REDNOVATEL</h1>
+        <p>Panel de Acceso Remoto Seguro</p>
+        
+        <button class="btn-acceso" onclick="descargarVNC()">
+            ENTRAR A MI PC (VNC)
+        </button>
+
+        <div style="margin-top: 20px; font-size: 0.8rem; color: #666;">
+            Túnel: nube.rednovatel.cl | Puerto: 5900
+        </div>
+    </div>
+
+    <script>
+        function descargarVNC() {
+            // Crea el contenido del archivo .vnc
+            const vncContent = "[Connection]\nHost=nube.rednovatel.cl\nPort=5900\n[Options]\nUseLocalCursor=1\nColorLevel=6";
+            const blob = new Blob([vncContent], { type: 'application/x-vnc' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = 'Acceso_RedNovatel.vnc';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+    </script>
+
+</body>
+</html>
